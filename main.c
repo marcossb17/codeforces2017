@@ -6,7 +6,7 @@
 int main(){
 	hdr* ard;
 	ard = create();
-
+	int axc;
 	//chamar kid vezes
 	//pra cada chama o cosmedamn
 
@@ -15,11 +15,17 @@ int main(){
 	srand(time(NULL));
 
 	cands = rand()%11;
+	cands = 5;
+	printf("cands: %d", cands);
 	printf("kids nmb: ");
 	scanf("%d", &kid);
 
-	while(cands != 0){
+	while(cands != 0 && kid != 0){
+		axc = cands;
 		cands = cosmedamn(ard, cands, kid);
+			if(cands != axc){
+				--kid;
+			}
 	}
 	print(ard);
 	return 0;

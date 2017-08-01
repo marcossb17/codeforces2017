@@ -44,6 +44,7 @@ void insert(hdr* ard, int knd){
 			
 			ard->last->prx = and;
 			ard->last = and;
+			ard->last->knd = knd;
 			and->prx = NULL;
 		}
 
@@ -52,30 +53,37 @@ void insert(hdr* ard, int knd){
 
 int cosmedamn(hdr* ard, int cands, int kid){
 
-	int i, subt, ssubt;
+	int i = 0, mind = 0, apl = 0, docesapl;
 	blk* axl;
-		for(i = 0, subt = 0; i <= kid-1; i++)
-			subt+=i;
+
+		for(i = 0, mind = 0; i <= kid-1; ++i){
+			mind+=i;
+		}
 		
-		printf("subt: %d\n\n", subt);
-		
-		ssubt = 1+rand()%(cands-subt);
+		printf("min. distinto: %d\n\n", mind);
+		docesapl = cands-mind;
+		apl = 1+rand()%docesapl;
 	
-		printf("ssubt: %d", ssubt);
+		printf("doces aplicados: %d\n", apl);
+
+		if(kid == 1){
+			insert(ard, cands);
+			return 0;
+		}
 
 			if(ard->first == NULL){
-				insert(ard, ssubt);
+				insert(ard, apl);
 			}
 
 			else{
 				for(axl = ard->first; axl != NULL; axl = axl->prx){
-					if(axl->knd == ssubt){
-						return ssubt;					
+					if(axl->knd == apl){
+						return cands;				
 					}
 				}
-				insert(ard, ssubt);
+				insert(ard, apl);
 			}
-
+			cands-=apl;
 	//10 4 3 2 1 - min. distinto - V
 		//for de kid-1 ate 1 e vai contando -- somando //caso nao tenha o suficiente encerra o programa --- pode fazer de primeira
 //			usa a formula da pa e se for menor que o total nao rola (levando em conta que se trata do minimo distinto, alias, se tratar ja tem uma funçao pronta e unica [pq senao da igual em algum momento])
@@ -86,6 +94,10 @@ int cosmedamn(hdr* ard, int cands, int kid){
 		//retorna - V
 	//temos um novo cont - V
 
+	//testar se tem doces o suficiente
+		//colocar pra numero perfeito - num. doces = min.distinto
+	//se for o ultimo dropa td
+
 	//todos distintos
 	//faixa de valores
 	//compara com os anteriores
@@ -93,7 +105,7 @@ int cosmedamn(hdr* ard, int cands, int kid){
 	//ou melhor, printa um valor que engloba todas as soluções possiveis
 
 	
-	return ssubt;
+	return cands;
 }
 
 
